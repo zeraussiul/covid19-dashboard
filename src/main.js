@@ -1,9 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
+import vuetify from "./plugins/vuetify";
+import apexcharts from "./plugins/apexcharts";
 
-Vue.config.productionTip = false;
+// import "leaflet/dist/leaflet.css";
 
-new Vue({
-  render: h => h(App)
-}).$mount("#app");
+new Vue({ vuetify, apexcharts, render: h => h(App) }).$mount("#app");
