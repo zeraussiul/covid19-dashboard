@@ -2,10 +2,15 @@
   <div id="inspire">
     <v-app-bar app flat hide-on-scroll>
       <v-btn icon>
-        <v-icon color="error">mdi-virus-outline</v-icon>
+        <v-icon color="secondary">mdi-virus-outline</v-icon>
       </v-btn>
 
-      <v-toolbar-title>Covid Stats</v-toolbar-title>
+      <v-toolbar-title
+        >Covid Stats |
+        <span class="secondary--text" v-on:select-country="setCountry">
+          {{ selectedCountry }}
+        </span>
+      </v-toolbar-title>
 
       <v-spacer />
 
@@ -21,7 +26,7 @@
             <InfoTable :cases="countriesCases" />
           </v-col>
           <v-col cols="12" sm="8" order="first" order-sm="last">
-            <InfoCards />
+            <InfoCards :stats="globalStats" />
             <InfoGraph />
           </v-col>
         </v-row>
@@ -49,20 +54,21 @@ export default {
   name: "Dashboard",
   components: { InfoGraph, InfoTable, InfoCards },
   data: () => ({
-    defaultDays: 15,
     drawer: false,
     lightMode: false,
     allInfo: null,
+    defaultDays: 15,
+    selectedCountry: "Global",
     countriesCases: [],
+    globalStats: {},
     historicalData: [],
     globalHistoricalData: [],
-    lastTableUpdate: null,
-
-    graphData: {}
+    lastTableUpdate: null
   }),
   mounted() {
     this.getCountriesData();
-    this.getHistoricalData();
+    // this.getHistoricalData();
+    this.getGlobalData();
     this.getGlobalHistoricalData();
   },
   methods: {
@@ -70,7 +76,7 @@ export default {
       this.lightMode = !this.lightMode;
       this.$vuetify.theme.dark = !this.lightMode;
     },
-    // InfoTable data
+    // InfoTable data, retrieving countries and total cases.
     getCountriesData() {
       axios
         .get("https://disease.sh/v3/covid-19/countries")
@@ -89,7 +95,18 @@ export default {
       }));
     },
 
-    // InfoGraph data
+    getGlobalData() {
+      axios
+        .get("https://disease.sh/v3/covid-19/all?yesterday=true")
+        .then(data => {
+          this.globalStats = data.data;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+
+    // InfoGraph data, historical data for global
     getGlobalHistoricalData(days = this.defaultDays) {
       axios
         .get(`https://disease.sh/v3/covid-19/historical/all?lastdays=${days}`)
@@ -98,15 +115,19 @@ export default {
         })
         .catch(err => console.error(err));
     },
-    // Historical data for ALL countries
-    getHistoricalData(days = this.defaultDays) {
-      axios
-        .get(`https://disease.sh/v3/covid-19/historical?lastdays=${days}`)
-        .then(data => {
-          this.historicalData = data.data;
-        })
-        .then(() => {})
-        .catch(err => console.error(err));
+    // Historical data for ALL countries, to be implemented.
+    // getHistoricalData(days = this.defaultDays) {
+    //   axios
+    //     .get(`https://disease.sh/v3/covid-19/historical?lastdays=${days}`)
+    //     .then(data => {
+    //       this.historicalData = data.data;
+    //     })
+    //     .then(() => {})
+    //     .catch(err => console.error(err));
+    // },
+
+    setCountry(country) {
+      console.log(country);
     }
   }
 };

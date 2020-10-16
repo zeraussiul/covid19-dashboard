@@ -2,13 +2,25 @@
   <div class="info-cards">
     <v-row>
       <v-col cols="12" sm="6" md="4">
-        <InfoCard title="Cases" change="23455" total="34345346" />
+        <InfoCard
+          title="Cases"
+          :change="stats.todayCases"
+          :total="stats.cases"
+        />
       </v-col>
       <v-col cols="12" sm="6" md="4">
-        <InfoCard title="Recovered" change="23455" total="34345346" />
+        <InfoCard
+          title="Recovered"
+          :change="stats.todayRecovered"
+          :total="stats.recovered"
+        />
       </v-col>
       <v-col cols="12" sm="6" md="4">
-        <InfoCard title="Deaths" change="23455" total="34345346" />
+        <InfoCard
+          title="Deaths"
+          :change="stats.todayDeaths"
+          :total="stats.deaths"
+        />
       </v-col>
     </v-row>
   </div>
@@ -17,19 +29,10 @@
 <script>
 import InfoCard from "@/components/InfoCard";
 
-// const stats = {
-//   country: "Global",
-//   caseType: "cases",
-//   change: 3156745,
-//   total: 6354512346
-// };
-
 export default {
   name: "InfoCards",
   components: { InfoCard },
   props: ["stats"],
-  data: () => ({
-    // TODO
-  })
+  data: () => ({})
 };
 </script>

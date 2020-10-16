@@ -25,6 +25,7 @@
             disable-pagination
             sort-by="cases"
             sort-desc
+            @click:row="selectCountry"
           ></v-data-table>
         </v-card>
       </v-col>
@@ -51,6 +52,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    selectCountry(e) {
+      this.$emit("select-country", e.country);
+    }
   }
 };
 </script>

@@ -117,7 +117,6 @@ export default {
         .get(`https://disease.sh/v3/covid-19/historical/all?lastdays=${days}`)
         .then(data => {
           this.graphData = buildChartData(data.data);
-
           this.series = [
             {
               data: this.graphData
@@ -131,9 +130,11 @@ export default {
 </script>
 
 <style>
-.apexcharts-tooltip {
+.apexcharts-tooltip,
+.apexcharts-menu-item {
   background: #272727;
-  color: orange;
-  opacity: 0;
+  color: #ffc107;
+}
+.apex-menu {
 }
 </style>
