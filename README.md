@@ -1,24 +1,17 @@
 # covid-dashboard
 
-## Project setup
-```
-yarn install
-```
+[Sample App](covid-dash-7a544.web.app)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+Simple Covid-19 dashboard with stats on total cases globally and per country. Total and daily change of cases, recovered, and deaths.
 
-### Compiles and minifies for production
-```
-yarn build
-```
+To install dependencies:
+`yarn` or `npm install`
 
-### Lints and fixes files
-```
-yarn lint
-```
+To run locally:
+`yarn serve`
+or `npm run serve`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+To build:
+`yarn build` or `npm run build`
+
+
