@@ -1,6 +1,6 @@
 # covid-dashboard
 
-[Sample App](covid-dash-7a544.web.app)
+[Sample App](https://covid-dash-7a544.web.app)
 
 Simple Covid-19 dashboard with stats on total cases globally and per country. Total and daily change of cases, recovered, and deaths.
 
